@@ -16,3 +16,10 @@ for feature in features:
     df[feature] = df[feature].fillna("")
 
 df["combined_features"] = df.apply(combine_features, axis=1)
+
+# Create count matrix for combined features column
+cv = CountVectorizer()
+count_matrix = cv.fit_transform(df["combined_features"])
+
+# Calculate cosine similarity
+cosine_sim = cosine_similarity(count_matrix)
